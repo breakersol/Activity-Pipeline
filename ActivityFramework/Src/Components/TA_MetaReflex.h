@@ -620,8 +620,6 @@ private:
     }
 };
 
-}
-
 #define ENABLE_REFLEX \
 template <typename T> friend struct CoreAsync::Reflex::TA_TypeInfo;
 
@@ -630,5 +628,20 @@ CoreAsync::Reflex::TA_MetaPropertyParameters<decltype(META_STRING("Property")), 
 
 #define TA_PROPERTY(VALUE) \
 CoreAsync::Reflex::TA_MetaPropertyParameters<decltype(META_STRING("Property")), TA_MetaRoleVersion<VALUE>> {}
+
+#define TA_REFLECTABLE_MEMBER(member) \
+{&Raw::member, META_STRING(#member)}
+
+#define TA_REFLECTABLE_MEMBER_PROP(member, property) \
+{&Raw::member, META_STRING(#member), property}
+
+#define TA_REFLECTABLE_PARAMETERS(...) TA_REFLECTABLE_PARAMETERS_IMPL(__VA_ARGS__, 3, 2)
+
+#define TA_REFLECTABLE_PARAMETERS_IMPL(_1, _2, _3, N, ...) TA_REFLECTABLE_PARAMETERS_##N(_1, _2, _3)
+#define TA_REFLECTABLE_PARAMETERS_1(x) TA_REFLECTABLE_MEMBER(x);
+#define TA_REFLECTABLE_PARAMETERS_2(x, y) TA_REFLECTABLE_MEMBER_PROP(x, y);
+
+}
+
 
 #endif // TA_METAREFLEX_H
