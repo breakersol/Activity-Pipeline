@@ -629,8 +629,8 @@ CoreAsync::Reflex::TA_MetaPropertyParameters<decltype(META_STRING("Property")), 
 #define TA_PROPERTY(VALUE) \
 CoreAsync::Reflex::TA_MetaPropertyParameters<decltype(META_STRING("Property")), TA_MetaRoleVersion<VALUE>> {}
 
-#define REGISTER_FIELD(CLASS, FIELD, ...) \
-TA_MetaField {&CLASS::FIELD, META_STRING(#FIELD), __VA_ARGS__}
+#define REGISTER_FIELD(FIELD, ...) \
+TA_MetaField {&Raw::FIELD, META_STRING(#FIELD), __VA_ARGS__}
 
 #define DEFINE_TYPE_INFO(CLASS_TYPE, ...) \
 template<> \
