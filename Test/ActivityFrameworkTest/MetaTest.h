@@ -295,20 +295,35 @@ struct TA_TypeInfo<M2Test> : TA_MetaTypeInfo<M2Test>
     };
 };
 
-template <>
-struct TA_TypeInfo<M3Test> : TA_MetaTypeInfo<M3Test, M2Test>
+// template <>
+// struct TA_TypeInfo<M3Test> : TA_MetaTypeInfo<M3Test, M2Test>
+// {
+//     static constexpr TA_MetaFieldList fields = {
+//         TA_MetaField {&Raw::vec, META_STRING("vec"), TA_DEFAULT_PROPERTY},
+//         TA_MetaField {&Raw::m_array, META_STRING("m_array"), TA_DEFAULT_PROPERTY},
+//         TA_MetaField {&Raw::pFloatPtr, META_STRING("pFloatPtr"), TA_DEFAULT_PROPERTY},
+//         TA_MetaField {&Raw::m_list, META_STRING("m_list"), TA_DEFAULT_PROPERTY},
+//         TA_MetaField {&Raw::m_forwardList, META_STRING("m_forwardList"), TA_DEFAULT_PROPERTY},
+//         TA_MetaField {&Raw::m_deque, META_STRING("m_deque"), TA_DEFAULT_PROPERTY},
+//         TA_MetaField {&Raw::m_stack, META_STRING("m_stack"), TA_DEFAULT_PROPERTY},
+//         TA_MetaField {&Raw::m_queue, META_STRING("m_queue"), TA_DEFAULT_PROPERTY},
+//         TA_MetaField {&Raw::m_prioritQueue, META_STRING("m_prioritQueue"), TA_DEFAULT_PROPERTY},
+//     };
+// };
+
+DEFINE_TYPE_INFO(M3Test, M2Test)
 {
-    static constexpr TA_MetaFieldList fields = {
-        TA_MetaField {&Raw::vec, META_STRING("vec"), TA_DEFAULT_PROPERTY},
-        TA_MetaField {&Raw::m_array, META_STRING("m_array"), TA_DEFAULT_PROPERTY},
-        TA_MetaField {&Raw::pFloatPtr, META_STRING("pFloatPtr"), TA_DEFAULT_PROPERTY},
-        TA_MetaField {&Raw::m_list, META_STRING("m_list"), TA_DEFAULT_PROPERTY},
-        TA_MetaField {&Raw::m_forwardList, META_STRING("m_forwardList"), TA_DEFAULT_PROPERTY},
-        TA_MetaField {&Raw::m_deque, META_STRING("m_deque"), TA_DEFAULT_PROPERTY},
-        TA_MetaField {&Raw::m_stack, META_STRING("m_stack"), TA_DEFAULT_PROPERTY},
-        TA_MetaField {&Raw::m_queue, META_STRING("m_queue"), TA_DEFAULT_PROPERTY},
-        TA_MetaField {&Raw::m_prioritQueue, META_STRING("m_prioritQueue"), TA_DEFAULT_PROPERTY},
-    };
+    AUTO_META_FIELDS(
+        REGISTER_FIELD(M3Test, vec, TA_DEFAULT_PROPERTY),
+        REGISTER_FIELD(M3Test, m_array, TA_DEFAULT_PROPERTY),
+        REGISTER_FIELD(M3Test, pFloatPtr, TA_DEFAULT_PROPERTY),
+        REGISTER_FIELD(M3Test, m_list, TA_DEFAULT_PROPERTY),
+        REGISTER_FIELD(M3Test, m_forwardList, TA_DEFAULT_PROPERTY),
+        REGISTER_FIELD(M3Test, m_deque, TA_DEFAULT_PROPERTY),
+        REGISTER_FIELD(M3Test, m_stack, TA_DEFAULT_PROPERTY),
+        REGISTER_FIELD(M3Test, m_queue, TA_DEFAULT_PROPERTY),
+        REGISTER_FIELD(M3Test, m_prioritQueue, TA_DEFAULT_PROPERTY),
+    )
 };
 
 }

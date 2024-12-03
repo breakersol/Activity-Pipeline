@@ -629,17 +629,15 @@ CoreAsync::Reflex::TA_MetaPropertyParameters<decltype(META_STRING("Property")), 
 #define TA_PROPERTY(VALUE) \
 CoreAsync::Reflex::TA_MetaPropertyParameters<decltype(META_STRING("Property")), TA_MetaRoleVersion<VALUE>> {}
 
-#define TA_REFLECTABLE_MEMBER(member) \
-{&Raw::member, META_STRING(#member)}
+#define REGISTER_FIELD(CLASS, FIELD, ...) \
+TA_MetaField {&CLASS::FIELD, META_STRING(#FIELD), __VA_ARGS__}
 
-#define TA_REFLECTABLE_MEMBER_PROP(member, property) \
-{&Raw::member, META_STRING(#member), property}
+#define DEFINE_TYPE_INFO(CLASS_TYPE, ...) \
+template<> \
+    struct TA_TypeInfo<CLASS_TYPE> : public TA_MetaTypeInfo<CLASS_TYPE, __VA_ARGS__>
 
-#define TA_REFLECTABLE_PARAMETERS(...) TA_REFLECTABLE_PARAMETERS_IMPL(__VA_ARGS__, 3, 2)
-
-#define TA_REFLECTABLE_PARAMETERS_IMPL(_1, _2, _3, N, ...) TA_REFLECTABLE_PARAMETERS_##N(_1, _2, _3)
-#define TA_REFLECTABLE_PARAMETERS_1(x) TA_REFLECTABLE_MEMBER(x);
-#define TA_REFLECTABLE_PARAMETERS_2(x, y) TA_REFLECTABLE_MEMBER_PROP(x, y);
+#define AUTO_META_FIELDS(...) \
+static constexpr TA_MetaFieldList fields = {__VA_ARGS__};
 
 }
 
