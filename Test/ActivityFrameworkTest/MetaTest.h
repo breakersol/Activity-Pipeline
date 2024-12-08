@@ -265,23 +265,40 @@ struct TA_TypeInfo<OtherTest> : TA_MetaTypeInfo<OtherTest,TestB>
     };
 };
 
-template <>
-struct TA_TypeInfo<MetaTest> : TA_MetaTypeInfo<MetaTest,BaseTest,OtherTest>
+// template <>
+// struct TA_TypeInfo<MetaTest> : TA_MetaTypeInfo<MetaTest,BaseTest,OtherTest>
+// {
+//     static constexpr TA_MetaFieldList fields = {
+//         TA_MetaField {Raw::META_RED, META_STRING("META_RED")},
+//         TA_MetaField {Raw::META_GREEN, META_STRING("META_GREEN")},
+//         TA_MetaField {Raw::META_BLUE, META_STRING("META_BLUE")},
+//         TA_MetaField {static_cast<float(Raw::*)()const>(&Raw::Sum), META_STRING("sum_0")},
+//         TA_MetaField {static_cast<float(Raw::*)(float)const>(&Raw::Sum),META_STRING("sum_1")},
+//         TA_MetaField {static_cast<bool(Raw::*)(int)const>(&Raw::contains), META_STRING("contains_0")},
+//         TA_MetaField {static_cast<bool(Raw::*)(std::string)const>(&Raw::contains),META_STRING("contains_1")},
+//         TA_MetaField {&Raw::productMM, META_STRING("productMM")},
+//         TA_MetaField {&Raw::str, META_STRING("str")},
+//         TA_MetaField {&Raw::getStr, META_STRING("getStr")},
+//         TA_MetaField {&Raw::startTest, META_STRING("startTest")},
+//         TA_MetaField {&Raw::printTest, META_STRING("printTest")}
+//     };
+// };
+
+DEFINE_TYPE_INFO(MetaTest, BaseTest, OtherTest)
 {
-    static constexpr TA_MetaFieldList fields = {
-        TA_MetaField {Raw::META_RED, META_STRING("META_RED")},
-        TA_MetaField {Raw::META_GREEN, META_STRING("META_GREEN")},
-        TA_MetaField {Raw::META_BLUE, META_STRING("META_BLUE")},
-        TA_MetaField {static_cast<float(Raw::*)()const>(&Raw::Sum), META_STRING("sum_0")},
-        TA_MetaField {static_cast<float(Raw::*)(float)const>(&Raw::Sum),META_STRING("sum_1")},
-        TA_MetaField {static_cast<bool(Raw::*)(int)const>(&Raw::contains), META_STRING("contains_0")},
-        TA_MetaField {static_cast<bool(Raw::*)(std::string)const>(&Raw::contains),META_STRING("contains_1")},
-        TA_MetaField {&Raw::productMM, META_STRING("productMM")},
-        TA_MetaField {&Raw::str, META_STRING("str")},
-        TA_MetaField {&Raw::getStr, META_STRING("getStr")},
-        TA_MetaField {&Raw::startTest, META_STRING("startTest")},
-        TA_MetaField {&Raw::printTest, META_STRING("printTest")}
-    };
+    AUTO_META_FIELDS(
+        REGISTER_ENUM(META_RED),
+        REGISTER_ENUM(META_GREEN),
+        REGISTER_ENUM(META_BLUE),
+        REGISTER_METHOD_OVERLOAD_GENERIC(Sum, const, float, float),
+        REGISTER_METHOD_OVERLOAD_GENERIC(Sum, const, float),
+        REGISTER_METHOD_OVERLOAD_GENERIC(contains, const, bool, int),
+        REGISTER_METHOD_OVERLOAD_GENERIC(contains, const, bool, std::string),
+        REGISTER_FIELD(productMM),
+        REGISTER_FIELD(str),
+        REGISTER_FIELD(getStr),
+        REGISTER_FIELD(printTest),
+        )
 };
 
 template <>
