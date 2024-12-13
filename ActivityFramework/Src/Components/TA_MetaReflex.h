@@ -644,7 +644,7 @@ TA_MetaField {static_cast<RET(Raw::*)(__VA_ARGS__) const>(&Raw::FIELD), META_STR
 #define REGISTER_METHOD_OVERLOAD_GENERIC(FIELD, CONST_QUAL, RET, ...) \
     TA_MetaField { \
                   static_cast<RET(MetaTest::*)(__VA_ARGS__) CONST_QUAL>(&MetaTest::FIELD), \
-                  META_STRING(#FIELD"<" #__VA_ARGS__ ">") \
+                  META_STRING(#FIELD"<"#__VA_ARGS__ ">") \
     }
 
 #define DEFINE_TYPE_INFO(CLASS_TYPE, ...) \
@@ -655,5 +655,7 @@ template<> \
 static constexpr TA_MetaFieldList fields = {__VA_ARGS__};
 }
 
+#define PRINT_FIELD(...) \
+std::cout << "<" #__VA_ARGS__ ">" << std::endl;
 
 #endif // TA_METAREFLEX_H

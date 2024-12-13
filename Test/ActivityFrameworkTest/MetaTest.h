@@ -265,25 +265,6 @@ struct TA_TypeInfo<OtherTest> : TA_MetaTypeInfo<OtherTest,TestB>
     };
 };
 
-// template <>
-// struct TA_TypeInfo<MetaTest> : TA_MetaTypeInfo<MetaTest,BaseTest,OtherTest>
-// {
-//     static constexpr TA_MetaFieldList fields = {
-//         TA_MetaField {Raw::META_RED, META_STRING("META_RED")},
-//         TA_MetaField {Raw::META_GREEN, META_STRING("META_GREEN")},
-//         TA_MetaField {Raw::META_BLUE, META_STRING("META_BLUE")},
-//         TA_MetaField {static_cast<float(Raw::*)()const>(&Raw::Sum), META_STRING("sum_0")},
-//         TA_MetaField {static_cast<float(Raw::*)(float)const>(&Raw::Sum),META_STRING("sum_1")},
-//         TA_MetaField {static_cast<bool(Raw::*)(int)const>(&Raw::contains), META_STRING("contains_0")},
-//         TA_MetaField {static_cast<bool(Raw::*)(std::string)const>(&Raw::contains),META_STRING("contains_1")},
-//         TA_MetaField {&Raw::productMM, META_STRING("productMM")},
-//         TA_MetaField {&Raw::str, META_STRING("str")},
-//         TA_MetaField {&Raw::getStr, META_STRING("getStr")},
-//         TA_MetaField {&Raw::startTest, META_STRING("startTest")},
-//         TA_MetaField {&Raw::printTest, META_STRING("printTest")}
-//     };
-// };
-
 DEFINE_TYPE_INFO(MetaTest, BaseTest, OtherTest)
 {
     AUTO_META_FIELDS(
@@ -297,36 +278,20 @@ DEFINE_TYPE_INFO(MetaTest, BaseTest, OtherTest)
         REGISTER_FIELD(productMM),
         REGISTER_FIELD(str),
         REGISTER_FIELD(getStr),
+        REGISTER_FIELD(startTest),
         REGISTER_FIELD(printTest),
         )
 };
 
-template <>
-struct TA_TypeInfo<M2Test> : TA_MetaTypeInfo<M2Test>
+DEFINE_TYPE_INFO(M2Test)
 {
-    static constexpr TA_MetaFieldList fields = {
-        TA_MetaField {&Raw::m_vec, META_STRING("m_vec"),TA_DEFAULT_PROPERTY},
-        TA_MetaField {&Raw::mx, META_STRING("mx"), TA_PROPERTY(2)},
-        TA_MetaField {&Raw::my, META_STRING("my")},
-        TA_MetaField {&Raw::px, META_STRING("px")},
-    };
+    AUTO_META_FIELDS(
+        REGISTER_FIELD(m_vec, TA_DEFAULT_PROPERTY),
+        REGISTER_FIELD(mx, TA_PROPERTY(2)),
+        REGISTER_FIELD(my, TA_DEFAULT_PROPERTY),
+        REGISTER_FIELD(px),
+        )
 };
-
-// template <>
-// struct TA_TypeInfo<M3Test> : TA_MetaTypeInfo<M3Test, M2Test>
-// {
-//     static constexpr TA_MetaFieldList fields = {
-//         TA_MetaField {&Raw::vec, META_STRING("vec"), TA_DEFAULT_PROPERTY},
-//         TA_MetaField {&Raw::m_array, META_STRING("m_array"), TA_DEFAULT_PROPERTY},
-//         TA_MetaField {&Raw::pFloatPtr, META_STRING("pFloatPtr"), TA_DEFAULT_PROPERTY},
-//         TA_MetaField {&Raw::m_list, META_STRING("m_list"), TA_DEFAULT_PROPERTY},
-//         TA_MetaField {&Raw::m_forwardList, META_STRING("m_forwardList"), TA_DEFAULT_PROPERTY},
-//         TA_MetaField {&Raw::m_deque, META_STRING("m_deque"), TA_DEFAULT_PROPERTY},
-//         TA_MetaField {&Raw::m_stack, META_STRING("m_stack"), TA_DEFAULT_PROPERTY},
-//         TA_MetaField {&Raw::m_queue, META_STRING("m_queue"), TA_DEFAULT_PROPERTY},
-//         TA_MetaField {&Raw::m_prioritQueue, META_STRING("m_prioritQueue"), TA_DEFAULT_PROPERTY},
-//     };
-// };
 
 DEFINE_TYPE_INFO(M3Test, M2Test)
 {
