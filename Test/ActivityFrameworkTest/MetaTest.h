@@ -233,36 +233,32 @@ private:
 
 namespace CoreAsync::Reflex {
 
-template <>
-struct TA_TypeInfo<TestA> : TA_MetaTypeInfo<TestA>
+DEFINE_TYPE_INFO(TestA)
 {
-    static constexpr TA_MetaFieldList fields = {
-        TA_MetaField {&Raw::print, META_STRING("print")},
-    };
+    AUTO_META_FIELDS(
+        REGISTER_FIELD(print)
+    )
 };
 
-template <>
-struct TA_TypeInfo<TestB> : TA_MetaTypeInfo<TestB>
+DEFINE_TYPE_INFO(TestB)
 {
-    static constexpr TA_MetaFieldList fields = {
-        TA_MetaField {&Raw::deduct, META_STRING("deduct")},
-    };
+    AUTO_META_FIELDS(
+        REGISTER_FIELD(deduct)
+    )
 };
 
-template <>
-struct TA_TypeInfo<BaseTest> : TA_MetaTypeInfo<BaseTest,TestA>
+DEFINE_TYPE_INFO(BaseTest, TestA)
 {
-    static constexpr TA_MetaFieldList fields = {
-        TA_MetaField {&Raw::sub, META_STRING("sub")},
-    };
+    AUTO_META_FIELDS(
+        REGISTER_FIELD(sub)
+        )
 };
 
-template <>
-struct TA_TypeInfo<OtherTest> : TA_MetaTypeInfo<OtherTest,TestB>
+DEFINE_TYPE_INFO(OtherTest, TestB)
 {
-    static constexpr TA_MetaFieldList fields = {
-        TA_MetaField {&Raw::product, META_STRING("product")},
-    };
+    AUTO_META_FIELDS(
+        REGISTER_FIELD(product)
+    )
 };
 
 DEFINE_TYPE_INFO(MetaTest, BaseTest, OtherTest)
